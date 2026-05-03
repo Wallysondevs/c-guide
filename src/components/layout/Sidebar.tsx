@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import {
-  Activity, AlertTriangle, Asterisk, BarChart, BellRing, Binary, BookOpen, BookText, Box, Boxes, Braces, Brain, Bug, BugPlay, Calculator, CheckCircle2, Clock, Code2, Compass, Component, CornerDownRight, CornerUpLeft, Cpu, Database, EyeOff, FileCode, FileInput, FileJson, FunctionSquare, Gamepad2, GitBranch, GitFork, GitMerge, Globe, Hammer, HardDrive, Hash, Languages, Layers, Layers3, Library, Link, ListOrdered, Locate, Lock, MapPin, MemoryStick, Network, Package, PhoneCall, Pilcrow, Plug, Printer, Radio, RefreshCw, Regex, Repeat, Rocket, Ruler, Search, Server, Settings, Share2, Shield, ShieldCheck, Shuffle, Sigma, Skull, Sparkles, Target, Terminal, TestTube, Trees, TrendingUp, Type, Variable, Workflow, Wrench, X, Zap
+  Activity, AlertTriangle, Asterisk, BarChart, BellRing, Binary, BookOpen, BookText, Box, Boxes, Braces, Brain, Bug, BugPlay, Calculator, CheckCircle2, Clock, Code2, Compass, Component, CornerDownRight, CornerUpLeft, Cpu, Database, EyeOff, FileCode, FileInput, FileJson, FunctionSquare, Gamepad2, GitBranch, GitFork, GitMerge, Globe, Hammer, HardDrive, Hash, Languages, Layers, Layers3, Library, Link as LinkIcon, ListOrdered, Locate, Lock, MapPin, MemoryStick, Network, Package, PhoneCall, Pilcrow, Plug, Printer, Radio, RefreshCw, Regex, Repeat, Rocket, Ruler, Search, Server, Settings, Share2, Shield, ShieldCheck, Shuffle, Sigma, Skull, Sparkles, Target, Terminal, TestTube, Trees, TrendingUp, Type, Variable, Workflow, Wrench, X, Zap
 } from "lucide-react";
 
 const NAVIGATION = [
@@ -93,7 +93,7 @@ const NAVIGATION = [
   {
     title: "Estruturas de dados",
     items: [
-      { path: "/lista-ligada", label: "Lista ligada simples", icon: Link },
+      { path: "/lista-ligada", label: "Lista ligada simples", icon: LinkIcon },
       { path: "/lista-dupla", label: "Lista duplamente ligada", icon: GitMerge },
       { path: "/pilha-fila", label: "Pilha e fila", icon: BookOpen },
       { path: "/arvore-binaria", label: "Árvore binária e BST", icon: ListOrdered },
