@@ -7,7 +7,7 @@ import { defineConfig } from "vite";
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
   export default defineConfig({
-    base: "/css-guide/",
+    base: "/c-guide/",
     plugins: [react(), tailwindcss()],
     resolve: { alias: { "@": path.resolve(__dirname, "src") } },
     build: { outDir: "dist", emptyOutDir: true },
