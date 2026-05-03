@@ -1,105 +1,601 @@
 import { Link } from "wouter";
-import {
-  BookOpen, Terminal, Hash, RefreshCw, Calculator, GitBranch,
-  Code2, Layers, Box, Type, Locate, MapPin, Compass, MemoryStick,
-  Boxes, Settings, FileCode, Hammer, FileInput, Printer, Library,
-  Wrench, Bug, AlertTriangle, Sparkles, Cpu, Rocket
-} from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 
 const SECTIONS = [
-  { path: "/historia", icon: BookOpen, title: "História do C", desc: "De 1972 ao C23: como uma linguagem de 50+ anos virou base de quase TUDO." },
-  { path: "/hello", icon: Terminal, title: "Hello World & Compilação", desc: "gcc, clang, .c → .o → executável. O ciclo de compilação que você precisa entender." },
-  { path: "/tipos", icon: Hash, title: "Tipos & Variáveis", desc: "int, char, float, double, signed/unsigned. O que cabe em cada um e por que sizeof importa." },
-  { path: "/conversoes", icon: RefreshCw, title: "Conversões e Cast", desc: "Promoções implícitas, cast explícito e os bugs de overflow/precisão que isso causa." },
-  { path: "/operadores", icon: Calculator, title: "Operadores", desc: "Aritméticos, lógicos, bitwise, ternário. A precedência que confunde até veterano." },
-  { path: "/controle", icon: GitBranch, title: "Controle de Fluxo", desc: "if/switch, while/do/for, break/continue/goto (sim, ainda existe — e tem uso legítimo)." },
-  { path: "/funcoes", icon: Code2, title: "Funções", desc: "Protótipos, recursão, passagem por valor, retornos múltiplos via ponteiro." },
-  { path: "/escopo", icon: Layers, title: "Escopo & Storage Classes", desc: "static, extern, auto, register — onde a variável vive e quem a enxerga." },
-  { path: "/arrays", icon: Box, title: "Arrays", desc: "Onde vivem na memória, por que decay para ponteiro, multidimensionais e VLAs." },
-  { path: "/strings", icon: Type, title: "Strings em C", desc: "Strings são char[] terminadas em \\0. strlen, strcpy, strcat e por que metade é insegura." },
-  { path: "/ponteiros-1", icon: Locate, title: "Ponteiros — o conceito", desc: "O assunto que assusta. Com analogias do mundo real e diagramas de memória, fica simples." },
-  { path: "/ponteiros-2", icon: MapPin, title: "Aritmética de ponteiros", desc: "p+1, p-q, p[i], duplo ponteiro. Como percorrer arrays e estruturas linkadas." },
-  { path: "/ponteiros-3", icon: Compass, title: "void*, função e const", desc: "Ponteiros genéricos, callbacks (qsort), e o segredo do const correctness." },
-  { path: "/memoria", icon: MemoryStick, title: "Memória Dinâmica", desc: "malloc, calloc, realloc, free. Stack vs heap. Vazamentos, valgrind, double free." },
-  { path: "/structs", icon: Boxes, title: "Structs, Unions, Enums", desc: "Modelando dados. Padding, alinhamento, bitfields, typedef e o pacote de bits." },
-  { path: "/preprocessador", icon: Settings, title: "Pré-processador", desc: "#define, macros, condicionais. Quando ajuda e quando vira pesadelo." },
-  { path: "/headers", icon: FileCode, title: "Headers & include guards", desc: "O que vai no .h, o que fica no .c, como evitar redefinição e símbolos duplicados." },
-  { path: "/make", icon: Hammer, title: "Make & build multi-arquivo", desc: "Compilação separada, linker, Makefile mínimo que economiza horas." },
-  { path: "/io", icon: FileInput, title: "I/O e Arquivos", desc: "fopen/fread/fwrite, modos, fseek, EOF e buffer de leitura." },
-  { path: "/stdio", icon: Printer, title: "stdio aprofundado", desc: "Format specifiers de printf/scanf, fgets correto, snprintf vs sprintf." },
-  { path: "/stdlib", icon: Library, title: "stdlib essencial", desc: "qsort, bsearch, atoi/strtol, getenv, exit, abort." },
-  { path: "/libs", icon: Wrench, title: "math, time, ctype, stdint", desc: "Bibliotecas que você usa em quase todo projeto." },
-  { path: "/erros", icon: Bug, title: "Erros, assert, gdb", desc: "errno, perror, assert.h e o básico do gdb pra debug que economiza dias." },
-  { path: "/ub", icon: AlertTriangle, title: "Undefined Behavior", desc: "O capítulo mais importante do livro. O que UB é, por que destrói programas e como evitar." },
-  { path: "/moderno", icon: Sparkles, title: "C Moderno (C11/17/23)", desc: "_Generic, _Static_assert, nullptr, [[attributes]] — o que mudou nas últimas décadas." },
-  { path: "/threads", icon: Cpu, title: "Threads & atômicos", desc: "<threads.h>, mutex, condition variables, <stdatomic.h> — concorrência sem libs externas." },
-  { path: "/projeto", icon: Rocket, title: "Projeto final", desc: "Implementar uma lista encadeada genérica do zero, com testes e Makefile." },
+  {
+    "title": "Introdução",
+    "items": [
+      {
+        "path": "/historia",
+        "title": "História do C"
+      },
+      {
+        "path": "/hello",
+        "title": "Hello World & Compilação"
+      }
+    ]
+  },
+  {
+    "title": "Fundamentos",
+    "items": [
+      {
+        "path": "/tipos",
+        "title": "Tipos & Variáveis"
+      },
+      {
+        "path": "/conversoes",
+        "title": "Conversões e Cast"
+      },
+      {
+        "path": "/operadores",
+        "title": "Operadores"
+      },
+      {
+        "path": "/controle",
+        "title": "Controle de Fluxo"
+      }
+    ]
+  },
+  {
+    "title": "Estrutura do código",
+    "items": [
+      {
+        "path": "/funcoes",
+        "title": "Funções"
+      },
+      {
+        "path": "/escopo",
+        "title": "Escopo & Storage Classes"
+      },
+      {
+        "path": "/arrays",
+        "title": "Arrays"
+      },
+      {
+        "path": "/strings",
+        "title": "Strings em C"
+      }
+    ]
+  },
+  {
+    "title": "Ponteiros",
+    "items": [
+      {
+        "path": "/ponteiros-1",
+        "title": "Ponteiros — o conceito"
+      },
+      {
+        "path": "/ponteiros-2",
+        "title": "Aritmética de ponteiros"
+      },
+      {
+        "path": "/ponteiros-3",
+        "title": "void*, função, const"
+      },
+      {
+        "path": "/memoria",
+        "title": "Memória dinâmica"
+      }
+    ]
+  },
+  {
+    "title": "Tipos compostos & build",
+    "items": [
+      {
+        "path": "/structs",
+        "title": "Structs, Unions, Enums"
+      },
+      {
+        "path": "/preprocessador",
+        "title": "Pré-processador"
+      },
+      {
+        "path": "/headers",
+        "title": "Headers & include guards"
+      },
+      {
+        "path": "/make",
+        "title": "Make & build multi-arquivo"
+      }
+    ]
+  },
+  {
+    "title": "Standard Library",
+    "items": [
+      {
+        "path": "/io",
+        "title": "I/O e arquivos"
+      },
+      {
+        "path": "/stdio",
+        "title": "stdio aprofundado"
+      },
+      {
+        "path": "/stdlib",
+        "title": "stdlib essencial"
+      },
+      {
+        "path": "/libs",
+        "title": "math, time, ctype, stdint"
+      }
+    ]
+  },
+  {
+    "title": "Tipos & baixo nível",
+    "items": [
+      {
+        "path": "/bitwise",
+        "title": "Operadores Bitwise"
+      },
+      {
+        "path": "/enums",
+        "title": "Enums a fundo"
+      },
+      {
+        "path": "/unions",
+        "title": "Unions na prática"
+      },
+      {
+        "path": "/typedef",
+        "title": "Typedef sem dor"
+      },
+      {
+        "path": "/const-volatile",
+        "title": "const e volatile"
+      },
+      {
+        "path": "/static-extern",
+        "title": "static e extern"
+      },
+      {
+        "path": "/stdint-stdbool",
+        "title": "stdint.h e stdbool.h"
+      },
+      {
+        "path": "/bitfields",
+        "title": "Bitfields em structs"
+      },
+      {
+        "path": "/endianness",
+        "title": "Endianness"
+      },
+      {
+        "path": "/alinhamento",
+        "title": "Alinhamento e padding"
+      },
+      {
+        "path": "/packed-structs",
+        "title": "Packed structs e protocolos binários"
+      },
+      {
+        "path": "/ponto-flutuante",
+        "title": "Ponto flutuante (IEEE 754)"
+      }
+    ]
+  },
+  {
+    "title": "Stdlib profundo",
+    "items": [
+      {
+        "path": "/string-h",
+        "title": "string.h em profundidade"
+      },
+      {
+        "path": "/math-h",
+        "title": "math.h: matemática real"
+      },
+      {
+        "path": "/time-h",
+        "title": "time.h: tempo, datas e cronômetros"
+      },
+      {
+        "path": "/ctype-h",
+        "title": "ctype.h: classificação de caracteres"
+      },
+      {
+        "path": "/assert-h",
+        "title": "assert.h: pré-condições e invariantes"
+      },
+      {
+        "path": "/setjmp-h",
+        "title": "setjmp/longjmp: o \"goto\" de longa distância"
+      },
+      {
+        "path": "/signal-h",
+        "title": "signal.h: lidando com sinais"
+      },
+      {
+        "path": "/locale-h",
+        "title": "locale.h e internacionalização básica"
+      },
+      {
+        "path": "/stdarg-h",
+        "title": "Funções variádicas (stdarg.h)"
+      },
+      {
+        "path": "/limits-float",
+        "title": "limits.h e float.h"
+      }
+    ]
+  },
+  {
+    "title": "Estruturas de dados",
+    "items": [
+      {
+        "path": "/lista-ligada",
+        "title": "Lista ligada simples"
+      },
+      {
+        "path": "/lista-dupla",
+        "title": "Lista duplamente ligada"
+      },
+      {
+        "path": "/pilha-fila",
+        "title": "Pilha e fila"
+      },
+      {
+        "path": "/arvore-binaria",
+        "title": "Árvore binária e BST"
+      },
+      {
+        "path": "/heap-priority",
+        "title": "Heap binário (priority queue)"
+      },
+      {
+        "path": "/hash-table",
+        "title": "Hash table"
+      },
+      {
+        "path": "/grafo",
+        "title": "Grafos: representação e travessia"
+      },
+      {
+        "path": "/trie",
+        "title": "Trie (árvore de prefixos)"
+      },
+      {
+        "path": "/fila-prioridade-dijkstra",
+        "title": "Dijkstra com heap"
+      }
+    ]
+  },
+  {
+    "title": "Algoritmos",
+    "items": [
+      {
+        "path": "/busca-binaria",
+        "title": "Busca binária sem off-by-one"
+      },
+      {
+        "path": "/sorts-basicos",
+        "title": "Sorts O(n²)"
+      },
+      {
+        "path": "/quicksort",
+        "title": "Quicksort"
+      },
+      {
+        "path": "/mergesort",
+        "title": "Mergesort"
+      },
+      {
+        "path": "/heapsort-radix",
+        "title": "Heapsort, counting e radix"
+      },
+      {
+        "path": "/recursao",
+        "title": "Recursão e backtracking"
+      },
+      {
+        "path": "/bfs-dfs",
+        "title": "BFS e DFS aplicados"
+      },
+      {
+        "path": "/programacao-dinamica",
+        "title": "Programação dinâmica"
+      }
+    ]
+  },
+  {
+    "title": "Sistema & POSIX",
+    "items": [
+      {
+        "path": "/fork-exec",
+        "title": "fork() e exec()"
+      },
+      {
+        "path": "/pipes",
+        "title": "Pipes anônimos e nomeados"
+      },
+      {
+        "path": "/mmap",
+        "title": "mmap: arquivo como memória"
+      },
+      {
+        "path": "/shared-mem-sem",
+        "title": "Shared memory e semáforos POSIX"
+      },
+      {
+        "path": "/sockets-tcp",
+        "title": "Sockets TCP"
+      },
+      {
+        "path": "/sockets-udp",
+        "title": "Sockets UDP"
+      },
+      {
+        "path": "/epoll-select",
+        "title": "select, poll e epoll"
+      },
+      {
+        "path": "/dlopen",
+        "title": "dlopen: carregar biblioteca em runtime"
+      },
+      {
+        "path": "/syscalls",
+        "title": "Syscalls direto"
+      },
+      {
+        "path": "/proc-fs",
+        "title": "/proc e /sys"
+      },
+      {
+        "path": "/argv-args",
+        "title": "argc, argv e getopt"
+      }
+    ]
+  },
+  {
+    "title": "Concorrência avançada",
+    "items": [
+      {
+        "path": "/mutex-condvar",
+        "title": "Mutex e variáveis de condição"
+      },
+      {
+        "path": "/atomics-c11",
+        "title": "Atomics do C11"
+      },
+      {
+        "path": "/memory-model",
+        "title": "Modelo de memória"
+      },
+      {
+        "path": "/lock-free",
+        "title": "Estruturas lock-free"
+      },
+      {
+        "path": "/openmp",
+        "title": "OpenMP: paralelismo declarativo"
+      }
+    ]
+  },
+  {
+    "title": "Build & Ferramentas",
+    "items": [
+      {
+        "path": "/gdb-basico",
+        "title": "GDB: o básico que economiza horas"
+      },
+      {
+        "path": "/gdb-avancado",
+        "title": "GDB avançado"
+      },
+      {
+        "path": "/valgrind",
+        "title": "Valgrind: caçador de memória"
+      },
+      {
+        "path": "/sanitizers",
+        "title": "Address/Undefined/Thread Sanitizer"
+      },
+      {
+        "path": "/profiling-perf",
+        "title": "Profiling com perf e gprof"
+      },
+      {
+        "path": "/cmake",
+        "title": "CMake básico"
+      },
+      {
+        "path": "/pkgconfig",
+        "title": "pkg-config"
+      },
+      {
+        "path": "/doxygen",
+        "title": "Doxygen: gerar documentação"
+      }
+    ]
+  },
+  {
+    "title": "Segurança",
+    "items": [
+      {
+        "path": "/buffer-overflow",
+        "title": "Buffer overflow"
+      },
+      {
+        "path": "/format-string",
+        "title": "Format string vulnerability"
+      },
+      {
+        "path": "/integer-overflow",
+        "title": "Integer overflow"
+      },
+      {
+        "path": "/use-after-free",
+        "title": "Use-after-free e double-free"
+      },
+      {
+        "path": "/hardening",
+        "title": "Hardening: flags e práticas"
+      },
+      {
+        "path": "/fuzzing",
+        "title": "Fuzzing com AFL++ e libFuzzer"
+      }
+    ]
+  },
+  {
+    "title": "Padrões & arquitetura",
+    "items": [
+      {
+        "path": "/opaque-pointers",
+        "title": "Opaque pointers (handles)"
+      },
+      {
+        "path": "/adt-modulo",
+        "title": "ADT e módulos"
+      },
+      {
+        "path": "/callbacks-funcptr",
+        "title": "Callbacks e ponteiros pra função"
+      },
+      {
+        "path": "/state-machine",
+        "title": "Máquinas de estado em C"
+      },
+      {
+        "path": "/module-pattern",
+        "title": "Module pattern e singletons"
+      }
+    ]
+  },
+  {
+    "title": "Testes",
+    "items": [
+      {
+        "path": "/unity-tests",
+        "title": "Unity: framework de teste minimalista"
+      },
+      {
+        "path": "/cmocka",
+        "title": "cmocka e mocking"
+      },
+      {
+        "path": "/tdd-em-c",
+        "title": "TDD em C na prática"
+      }
+    ]
+  },
+  {
+    "title": "Bibliotecas populares",
+    "items": [
+      {
+        "path": "/libcurl",
+        "title": "libcurl: HTTP em C"
+      },
+      {
+        "path": "/sqlite-c",
+        "title": "SQLite em C"
+      },
+      {
+        "path": "/json-c",
+        "title": "Parsing JSON com cJSON"
+      },
+      {
+        "path": "/regex-c",
+        "title": "Regex POSIX (regex.h)"
+      },
+      {
+        "path": "/ncurses",
+        "title": "ncurses: TUI em C"
+      },
+      {
+        "path": "/sdl2",
+        "title": "SDL2: gráficos e janela"
+      }
+    ]
+  },
+  {
+    "title": "Projetos práticos",
+    "items": [
+      {
+        "path": "/projeto-shell-mini",
+        "title": "Projeto: mini-shell"
+      },
+      {
+        "path": "/projeto-http-server",
+        "title": "Projeto: servidor HTTP mínimo"
+      },
+      {
+        "path": "/projeto-game-of-life",
+        "title": "Projeto: Game of Life"
+      },
+      {
+        "path": "/projeto-json-parser",
+        "title": "Projeto: parser JSON do zero"
+      },
+      {
+        "path": "/projeto-allocator",
+        "title": "Projeto: allocator próprio"
+      }
+    ]
+  },
+  {
+    "title": "Nível profissional",
+    "items": [
+      {
+        "path": "/erros",
+        "title": "Erros, assert, gdb"
+      },
+      {
+        "path": "/ub",
+        "title": "Undefined Behavior"
+      },
+      {
+        "path": "/moderno",
+        "title": "C Moderno (C11/17/23)"
+      },
+      {
+        "path": "/threads",
+        "title": "Threads & atômicos"
+      },
+      {
+        "path": "/projeto",
+        "title": "Projeto: lista encadeada"
+      }
+    ]
+  }
 ];
 
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <header className="mb-12 text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/10 mb-6">
-          <Terminal className="w-10 h-10 text-primary" />
+    <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 pb-24">
+      <header className="mb-16 text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
+          <BookOpen className="w-8 h-8 text-primary" />
         </div>
-        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-4">C Guide</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Livro completo de <strong>Linguagem C</strong> em pt-BR — do
-          primeiro <code>printf</code> ao C23. Cada capítulo tem
-          <strong> exemplos do mundo real</strong>, comparações
-          <strong> antes/depois</strong>, <strong>diagramas de memória</strong>
-          e as <strong>armadilhas</strong> que travaram seu programa.
+        <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+          Linguagem C — Livro Completo
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          116 capítulos do "Hello World" até estruturas de dados, sistemas POSIX,
+          concorrência, segurança e projetos reais. Em pt-BR, sem rodeios.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
-          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
-            {SECTIONS.length} capítulos
-          </span>
-          <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground">Linguagem simples</span>
-          <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground">Diagramas de memória</span>
-          <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground">Foco em UB</span>
-        </div>
       </header>
 
-      <section className="mb-10 p-6 rounded-2xl border border-border bg-gradient-to-br from-primary/10 to-transparent">
-        <h2 className="text-lg font-bold mb-2">Por que aprender C em 2025?</h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Linux, Windows, macOS, navegadores, bancos de dados, libs de
-          IA, compiladores, sistemas embarcados, jogos AAA — é
-          <strong> tudo C </strong> ou linguagens que falam com C.
-          Aprender C te ensina como o computador realmente funciona:
-          memória, ponteiros, alinhamento, undefined behavior. Depois
-          disso, qualquer outra linguagem fica mais simples.
-        </p>
-      </section>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {SECTIONS.map(({ path, icon: Icon, title, desc }) => (
-          <Link
-            key={path}
-            href={path}
-            className="group p-5 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all"
-          >
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                <Icon className="w-5 h-5 text-primary" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
+      <div className="space-y-12">
+        {SECTIONS.map(sec => (
+          <section key={sec.title}>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              {sec.title}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {sec.items.map(item => (
+                <Link key={item.path} href={item.path}>
+                  <a className="group block p-4 rounded-xl border border-border bg-card hover:bg-accent hover:border-primary/40 transition-all">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-sm">{item.title}</span>
+                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                  </a>
+                </Link>
+              ))}
             </div>
-          </Link>
+          </section>
         ))}
       </div>
-
-      <footer className="mt-16 text-center text-sm text-muted-foreground">
-        <p>
-          Mantido por <a href="https://github.com/Wallysondevs" className="text-primary hover:underline">Wallysondevs</a>
-          {" · "}
-          <a href="https://github.com/Wallysondevs/c-guide" className="text-primary hover:underline">Código no GitHub</a>
-        </p>
-      </footer>
     </div>
   );
 }
